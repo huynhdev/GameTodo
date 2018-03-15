@@ -12,7 +12,9 @@ const squareSource = {
   endDrag(props, monitor) {
     const item = monitor.getItem()
     const dropResult = monitor.getDropResult()
-    moveText(item.i, dropResult.i)
+    if(dropResult){
+      moveText(item.i, dropResult.i)
+    }
   },
 }
 
@@ -28,9 +30,14 @@ class Square extends Component {
   render() {
     const { isDragging, connectDragSource } = this.props
     return connectDragSource(
-      <p style={{opacity: isDragging ? 0.5 : 1}}>
-        {this.props.children}
-      </p>
+      <div className="table">
+        <div className="td">
+          <div className="textarea_box" >
+            {this.props.children}
+          </div>
+          <div className="textarea_overlay"></div>
+        </div>
+      </div>
     );
   }
 }

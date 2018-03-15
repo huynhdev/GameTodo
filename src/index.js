@@ -6,9 +6,9 @@ import Board from './components/Board'
 
 const rootEl = document.getElementById('root');
 
-observe(squares =>
+observe((squares, desc) =>
   ReactDOM.render(
-    <Board squares={squares} />,
+    <Board squares={squares} desc={desc} />,
     rootEl
   )
 );

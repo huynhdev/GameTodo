@@ -15,4 +15,88 @@ body {
     margin: 0 0 18px 1.17%;
     vertical-align: top;
   }
+  .drop_box_border{
+    width: 100%;
+    height: 116px;
+    margin-right: 10px;
+    border-width:1px;  
+    border-style:solid;
+  }
+  .box_desc{
+    width: 100%;
+    height: 70px;
+    border-style: solid;
+    border-width: 1px;
+    margin: 10px 0;
+    border-radius: 8px;
+    textarea{
+      color: #262830;
+      font-size: 14px;
+      line-height: 18px;
+      font-weight: 300;
+      height: 100%;
+      width: 100%;
+      padding: 7px 9px;
+      border: 1px solid #f0ebed;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+  }
 }
+
+
+.subBox{
+  .drop_boxes_wrap{
+    font-size: 13px;
+    line-height: 16px;
+    width: 47.93%;
+    float: left;
+    .drop_boxes{
+      margin: 0;
+      padding: 0;
+      border: 0;
+      font-size: 100%;
+      font: inherit;
+      vertical-align: baseline;
+      .drop_box_container{
+        width: 31.36%;
+        margin: 0 1.973% 7px 0;
+        display: inline-block;
+        vertical-align: top;
+      }
+      .drop_box_border{
+        width: 100%;
+        height: 116px;
+        margin-right: 10px;
+        border-width:1px;  
+        border-style:solid;
+      }
+
+    }
+  }
+
+}
+
+.table{
+  display: table;
+  width: 100%;
+  height: 100%;
+  .td{
+    display: table-cell;
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    .textarea_box{
+      color: #093254;
+      font-size: 16px;
+      line-height: 20px;
+      text-align: center;
+      font-weight: 300;
+      position: relative;
+      padding: 0 5px;
+      word-break: break-word;
+    }
+  }
+}
+

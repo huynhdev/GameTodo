@@ -6,15 +6,15 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import BoardSquare from './BoardSquare'
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend'
-import {addText} from '../Game'
+import {addText, addDesc} from '../Game'
 
 const focusField = input => {
-  input.focus();
+  input ? input.focus() : null
+
 };
 
 class Board extends Component {
   state={
-    squares: Array(10).fill(null),
     data: null,
   }
 
@@ -34,38 +34,89 @@ class Board extends Component {
     }
     
   }
+  updateDesc(i,e){
+    addDesc(e.target.value,i)
+  }
 
-  renderSquare(i) {
+  renderSquareImportant(i) {
     return (
       <div key={i}
         className="drop_box_container"
       >
-        <BoardSquare i={i} onClick={this.handleClick.bind(this)} 
+        <BoardSquare i={i}  onClick={this.handleClick.bind(this)} 
         >
-          {this.props.squares[i]}
+          <div style={{cursor: 'move'}}>
+            {this.props.squares[i]}
+          </div>
         </BoardSquare>
-        <div style={{width: '100%', height: '75px', borderStyle: 'solid', margin: '10px 0 ', display: this.props.squares[i] ? null : 'none'}}>
-          <textarea ref={focusField}  style={{boxSizing: 'border-box', width: '100%', height: '100%'}}></textarea>
-        </div>
+        {
+          <div className="box_desc" style={{ display: this.props.squares[i] ? null : 'none'}}>
+            <textarea  ref={this.props.squares[i]  ? focusField : null}  onChange={(event) => this.updateDesc(i,event)} placeholder="Why is this card so important to you?" value={i < 10 ? this.props.desc[i] ? this.props.desc[i] : ""  : ""}>
+            </textarea>
+          </div>
+        }
       </div>
     );
   }
 
+  renderNotImportant(i){
+    return(
+      <div key={i} className="drop_box_container">
+        <BoardSquare i={i} onClick={this.handleClick.bind(this)} 
+        >
+          <div style={{cursor: 'move'}}>
+            {this.props.squares[i]}
+          </div>
+        </BoardSquare>
+      </div>
+    )
+
+  }
+
   render() {
-    const squares = [];
+    const squaresImportant = [];
+    const squaresSomeWhatImportant = [];
+    const squaresNotImportant = [];
+
     for (let i = 0; i < 10; i++) {
-      squares.push(this.renderSquare(i));
+      squaresImportant.push(this.renderSquareImportant(i));
+    }
+    for (let i = 10; i<28; i++){
+      squaresSomeWhatImportant.push(this.renderNotImportant(i))
+    }
+    for (let i = 28; i<46; i++){
+      squaresNotImportant.push(this.renderNotImportant(i))
     }
 
     return (
       <Grid fluid>
         <Row>
-          <Col xs={6} md={4}>
+          <Col xs={6} md={5}>
             <h2>{_.last(this.state.data)}</h2>
           </Col>
-          <Col xs={6} md={8}>
+          <Col xs={6} md={7}>
+            <hr />
+            <h1>VERY IMPORTANT</h1>
             <div className="boxContainer">
-              {squares}
+              {squaresImportant}
+            </div>
+            <Row className="subBox">
+              <Col md={6} className="drop_boxes_wrap">
+                <hr />
+                <h1>SOMEWHAT IMPORTANT </h1>
+                <div className="drop_boxes">
+                  {squaresSomeWhatImportant}
+                </div>
+              </Col>
+              <Col md={6} className="drop_boxes_wrap">
+                <hr />
+                <h1>NOT IMPORTANT</h1>
+                <div className="drop_boxes">
+                  {squaresNotImportant}
+                </div>
+              </Col>
+            </Row>
+            <div>
             </div>
           </Col>
         </Row>

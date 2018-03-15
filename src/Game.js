@@ -1,8 +1,9 @@
-let squares = Array(10).fill(null)
+let squares = Array(46).fill(null)
+let desc = Array(10).fill(null)
 let observer = null;
 
 function emitChange() {
-  observer(squares);
+  observer(squares, desc);
 }
 export function observe(o) {
   if (observer) {
@@ -19,8 +20,23 @@ export function addText(text,i){
 }
 
 export function moveText(from , to){
-  let text = squares[from]
+  let title = squares[from]
   squares[from] = squares[to]
-  squares[to] = text
+  squares[to] = title
+  let descTitle = desc[from]
+  desc[from] = desc[to]
+  desc[to] = descTitle
   emitChange();
+}
+
+export function addDesc(text,i){
+  desc[i] = text;
+  emitChange();
+}
+
+export function canMove(i){
+  if(i >= 0 && i < 46){
+    return true;
+  }
+  return false;
 }
