@@ -26,11 +26,11 @@ function collect(connect, monitor) {
 
 class BoardSquare extends Component {
   render(){
-    const { i, connectDropTarget, isOver, canDrop } = this.props;
+    const { i, square, connectDropTarget, isOver, canDrop } = this.props;
     return connectDropTarget(
       <div 
-        className="drop_box_border"
-        style={{borderStyle: canDrop ? 'dashed' : 'solid', borderWidth: isOver ? '2px' : '1px'}}
+        className={square ? "drop_box_border drop_box_border_ht" : "drop_box_border"}
+        style={{borderStyle: canDrop ? 'dashed' : 'solid', borderWidth: '2px', borderColor: isOver ? 'black' : '#f0ebed'  }}
         onClick={() => this.props.onClick(i)}
       >
         <Square i={i}>

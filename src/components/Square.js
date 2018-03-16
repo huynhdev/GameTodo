@@ -30,12 +30,11 @@ class Square extends Component {
   render() {
     const { isDragging, connectDragSource } = this.props
     return connectDragSource(
-      <div className="table">
+      <div className="table" style={{ opacity: isDragging ? 0.5 : 1 }}>
         <div className="td">
           <div className="textarea_box" >
             {this.props.children}
           </div>
-          <div className="textarea_overlay"></div>
         </div>
       </div>
     );
